@@ -1,5 +1,9 @@
 <template>
-  <button v-if="!link" class="btn" :class="[mode , border , {dashed : isDashed}]">
+  <button
+    v-if="!link"
+    class="btn"
+    :class="[mode, border, { dashed: isDashed }]"
+  >
     <slot></slot>
   </button>
 
@@ -35,30 +39,12 @@ export default {
       default: "/",
     },
   },
-  computed: {
-    // btnClass() {
-    //   if (this.mode !== null) {
-    //     console.log("mode");
-    //     return this.mode;
-    //   }
-    //   if (this.border !== "") {
-    //     console.log("border");
-
-    //     return this.border;
-    //   }
-    //   if (this.isDashed === true) {
-    //     console.log("dashed");
-    //     console.log(this.isDashed);
-    //     return "dashed";
-    //   }
-    //   return "btn";
-    // },
-  },
 };
 </script>
 
 <style lang="scss">
-.btn , .btn a {
+.btn,
+.btn a {
   padding: 1rem 2rem;
   border-radius: 50px;
   margin: 0 0.2rem;
@@ -66,6 +52,7 @@ export default {
   border: none;
   background-color: #9fd6b7;
   cursor: pointer;
+  text-decoration: none;
 }
 .orange {
   background-color: #feae87;
@@ -73,8 +60,6 @@ export default {
 
 .green {
   background: #9fd6b7;
-  text-decoration: none;
-
 }
 
 .dashed {
@@ -95,7 +80,7 @@ export default {
 
 .dashed {
   border: 1px dashed #707070;
-  background-color: transparent;;
+  background-color: transparent;
   color: #707070;
 }
 </style>

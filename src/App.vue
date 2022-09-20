@@ -34,6 +34,7 @@ export default {
 body {
   box-sizing: border-box;
   font-size: 1.5rem;
+  line-height: 1.4;
 }
 
 html {
@@ -94,6 +95,11 @@ input{
   &:focus{
     outline: none;
   }
+}
+
+img{
+  display: inline-block;
+  object-fit: cover;
 }
 
 

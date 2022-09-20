@@ -25,8 +25,9 @@
       </ul>
 
       <div class="coaches__actions">
+        <base-button link to="/requests" mode="green">contact</base-button>
         <base-button link :to="`/coaches/${coach.id}`" mode="orange">View</base-button>
-        <base-button link to="/requests" mode="green">View</base-button>
+
       </div>
 
       <base-expert :rate="rate"></base-expert>
