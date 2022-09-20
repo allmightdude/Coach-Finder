@@ -1,18 +1,27 @@
 <template>
-  <h1>Coaches</h1>
-
   <form class="search">
-    <input type="text" />
-    <button>sort</button>
+    <div class="search__input">
+      <input type="text" placeholder="Leadership" />
+      <button class="clear-input">&#x2716;</button>
+    </div>
+    <button class="btn-sort">
+      <svg class="sort-icon">
+        <use xlink:href="@/assets/sprite.svg#icon-sort"></use>
+      </svg>
+    </button>
   </form>
 
-  <div>
-    <h3>24 Coach Are Available</h3>
-    <button>Register as a coach</button>
+  <div class="coaches__title mt-2">
+    <h2><span>24</span> Coach Are Available</h2>
+    <base-button isDashed>Register as a coach</base-button>
   </div>
 
-  <ul class="coaches">
-    <coach-item v-for="coach in coaches" :key="coach.id" :coach="coach"></coach-item>
+  <ul class="coaches mt-2">
+    <coach-item
+      v-for="coach in coaches"
+      :key="coach.id"
+      :coach="coach"
+    ></coach-item>
   </ul>
 </template>
 
@@ -20,32 +29,69 @@
 import CoachItem from "../../components/coaches/CoachItem.vue";
 
 export default {
-  data() {
-    return {
-      coaches: [
-        {
-          id: "c1",
-          firstName: "Maximilian",
-          lastName: "Schwarzmüller",
-          areas: ["frontend", "backend", "career"],
-          description:
-            "I'm Maximilian and I've worked as a freelance web developer for years. Let me help you become a developer as well!",
-          hourlyRate: 30,
-        },
-        {
-          id: "c2",
-          firstName: "Julie",
-          lastName: "Jones",
-          areas: ["frontend", "career"],
-          description:
-            "I am Julie and as a senior developer in a big tech company, I can help you get your first job or progress in your current role.",
-          hourlyRate: 30,
-        },
-      ],
-    };
-  },
   components: {
     CoachItem,
   },
+  computed : {
+    coaches(){
+      return this.$store.getters['coaches/coaches'];
+    }
+  }
 };
 </script>
+
+<style lang="scss" scoped>
+.search {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+
+  &__input {
+    flex: 1 0 0;
+    border-radius: 10px;
+    border: 2px solid #000;
+    color: #000;
+    display: flex;
+    flex-direction: row-reverse;
+  }
+
+  input{
+    width: 100%;
+    border: none;
+    padding: 0 1.5rem;
+    border-radius: 10px;
+  }
+
+  .clear-input{
+    background-color: #EFEFEF;
+    border: none;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    width: 4rem;
+    height: 100%;
+  }
+}
+
+.btn-sort{
+  background-color: #5dbee7;
+  width: 5rem;
+  height: 4rem;
+  border-radius: 10px;
+  border: 2px solid #000;
+  color: white;
+
+  svg{
+    fill: white;
+  }
+}
+
+.coaches__title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  span {
+    color: #9fd6b7;
+  }
+}
+</style>

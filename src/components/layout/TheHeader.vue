@@ -26,7 +26,7 @@ a{
 header {
   background-color: #9fd6b7;
   color: white;
-  padding: 3rem;
+  padding: 3rem 8rem;
   width: 100%;
   height: 35vh;
   background-size: 100%;

@@ -1,7 +1,9 @@
 <template>
   <the-header></the-header>
 
-  <router-view />
+  <div class="main">
+    <router-view />
+  </div>
 </template>
 
 <script>
@@ -18,6 +20,7 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
+  margin: 0 auto;
 }
 
 *,
@@ -30,6 +33,7 @@ export default {
 
 body {
   box-sizing: border-box;
+  font-size: 1.5rem;
 }
 
 html {
@@ -53,4 +57,44 @@ h3 {
 .mt-2 {
   margin-top: 2rem;
 }
+
+.main{
+  max-width: 60rem;
+  margin: 0 auto;
+}
+
+ul{
+  list-style-type: none;
+}
+
+[class *="-icon"]{
+  width: 2rem;;
+  height: 2rem;
+}
+
+.check-icon{
+  fill: #9FD6B7;
+}
+
+.dollar-icon{
+  fill: #FEAE87;
+}
+
+.heart-icon{
+  fill: #E92D2D;
+}
+
+.star-icon{
+  fill: #FFE600;
+}
+
+input{
+  outline : none;
+
+  &:focus{
+    outline: none;
+  }
+}
+
+
 </style>

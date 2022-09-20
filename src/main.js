@@ -3,4 +3,14 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 
-createApp(App).use(store).use(router).mount('#app')
+import BaseButton from './components/ui/BaseButton.vue';
+import BaseBadge from './components/ui/BaseBadge.vue';
+import BaseExpert from './components/ui/BaseExpert.vue';
+
+const app = createApp(App);
+
+app.component('base-button' , BaseButton);
+app.component('base-badge' , BaseBadge);
+app.component('base-expert' , BaseExpert);
+
+app.use(store).use(router).mount('#app')
