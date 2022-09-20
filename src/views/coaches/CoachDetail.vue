@@ -8,7 +8,7 @@
         <base-badge v-for="area in areas" :key="area">{{ area }}</base-badge>
       </ul>
       <div class="mt-2">
-        <base-button mode="orange">Contact Coach</base-button>
+        <base-button link :to="coachContactLink" mode="orange">Contact Coach</base-button>
       </div>
 
       <div class="mt-2">
@@ -63,17 +63,15 @@
     <h3 class="mt-2">Reviews</h3>
     <coach-review></coach-review>
     <coach-review></coach-review>
-
-
   </div>
 </template>
 
 <script>
-import CoachReview from '../../components/coaches/CoachReview.vue'
+import CoachReview from "../../components/coaches/CoachReview.vue";
 export default {
   props: ["id"],
-  components :{
-    CoachReview
+  components: {
+    CoachReview,
   },
   data() {
     return {
@@ -90,14 +88,15 @@ export default {
     rate() {
       return this.selectedCoach.hourlyRate;
     },
+    coachContactLink(){
+        return this.$route.path + "/contact"
+    }
   },
 
   created() {
     this.selectedCoach = this.$store.getters["coaches/coaches"].find(
       (coach) => coach.id === this.id
     );
-    console.log(this.selectedCoach);
-    console.log("red");
   },
 };
 </script>

@@ -25,9 +25,10 @@
       </ul>
 
       <div class="coaches__actions">
-        <base-button link to="/requests" mode="green">contact</base-button>
-        <base-button link :to="`/coaches/${coach.id}`" mode="orange">View</base-button>
-
+        <base-button link :to="coachContactLink" mode="green"
+          >contact</base-button
+        >
+        <base-button link :to="coachDetailLink" mode="orange">View</base-button>
       </div>
 
       <base-expert :rate="rate"></base-expert>
@@ -40,8 +41,8 @@ export default {
   props: ["coach"],
   data() {
     return {
-      selectedCoach : null,
-    }
+      selectedCoach: null,
+    };
   },
 
   computed: {
@@ -54,11 +55,16 @@ export default {
     areas() {
       return this.coach.areas;
     },
-    rate(){
+    rate() {
       return this.coach.hourlyRate;
-    }
+    },
+    coachDetailLink() {
+      return this.$route.path + "/" + this.coach.id;
+    },
+    coachContactLink() {
+      return this.$route.path + "/" + this.coach.id + "/contact";
+    },
   },
-
 };
 </script>
 
@@ -84,12 +90,12 @@ export default {
       color: #686868;
       font-size: 1.3rem;
     }
-    
-    &-rate{
+
+    &-rate {
       display: flex;
       align-items: center;
 
-      svg{
+      svg {
         width: 1.5rem;
         height: 1.5rem;
       }

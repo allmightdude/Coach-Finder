@@ -9,9 +9,8 @@ import RequestsReceived from "../views/requests/RequestsReceived.vue";
 const routes = [
   { path: "/", redirect: '/coaches' },
   { path: "/coaches", component: CoachesList },
-  { path: "/coaches/:id", component: CoachDetail , props : true, children : [
-    {path : 'contact' , component : ContactCoach}
-  ]},
+  { path: "/coaches/:id", component: CoachDetail , props : true},
+  {path : '/coaches/:id/contact' , component : ContactCoach},
   { path: "/register", component: CoachRegisteration },
   {path : "/requests" ,  component : RequestsReceived}
 ];
