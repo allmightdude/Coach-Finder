@@ -25,6 +25,11 @@
       <input type="text" id="caption" v-model.trim="caption" />
     </div>
 
+    <div class="form-control">
+      <label for="caption">Your Picture</label>
+      <input type="file" id="picture" />
+    </div>
+
     <div class="form-control demo">
       <h4>area's experiense</h4>
       <div class="mt-2">
@@ -50,13 +55,20 @@ export default {
     };
   },
   components: {
-    CheckboxForm
+    CheckboxForm,
   },
-  methods:{
-    submitaData(){
-      console.log(this.areas);
-    }
-  }
+  methods: {
+    submitaData() {
+      const data = {
+        firstName: this.firstName,
+        lastName: this.lastName,
+        description: this.description,
+        hourlyRate: this.hourlyRate,
+        areas: [...this.areas],
+      }
+      this.$store.dispatch('coaches/registerCoach' , data)
+    },
+  },
 };
 </script>
 
@@ -120,6 +132,4 @@ textarea {
 .invalid textarea {
   border: 1px solid red;
 }
-
-
 </style>
