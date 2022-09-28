@@ -22,7 +22,7 @@
 
     <div class="form-control">
       <label for="caption">Caption</label>
-      <input type="number" id="caption" v-model.number="caption" />
+      <input type="text" id="caption" v-model.trim="caption" />
     </div>
 
     <div class="form-control demo">
