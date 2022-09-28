@@ -7,7 +7,7 @@
     <slot></slot>
   </button>
 
-  <router-link :to="to" class="btn" :class="mode" v-else>
+  <router-link :to="to" class="btn" :class="[mode , {dashed : isDashed}]" v-else>
     <slot></slot>
   </router-link>
 </template>

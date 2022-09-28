@@ -13,7 +13,7 @@
 
   <div class="coaches__title mt-2">
     <h2><span>24</span> Coach Are Available</h2>
-    <base-button isDashed>Register as a coach</base-button>
+    <base-button link isDashed to="/register" >Register as a coach</base-button>
   </div>
 
   <ul class="coaches mt-2">

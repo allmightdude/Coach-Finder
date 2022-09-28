@@ -7,6 +7,17 @@
   </base-card>
 </template>
 
+<script>
+export default {
+  props :['request'],
+  computed: {
+    emailLink(){
+      return 'mailto:' + this.request.email;
+    }
+  },
+}
+</script>
+
 <style lang="scss" scoped>
 .request {
   padding: 2rem;
