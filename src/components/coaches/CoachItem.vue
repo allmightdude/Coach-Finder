@@ -79,7 +79,7 @@ export default {
     display: flex;
 
     &-name {
-      font-size: 1.8rem;
+      font-size: 1.5rem;
       font-weight: bold;
       margin-bottom: 0.5rem;
     }
@@ -88,7 +88,7 @@ export default {
     &-rate {
       margin-bottom: 0.5rem;
       color: #686868;
-      font-size: 1.3rem;
+      font-size: 1.2rem;
     }
 
     &-rate {
@@ -145,7 +145,6 @@ export default {
 
   &__areas {
     display: flex;
-    gap: 1rem;
     flex-wrap: wrap;
     margin-top: 1rem;
   }

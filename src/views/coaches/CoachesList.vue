@@ -90,6 +90,16 @@ export default {
   justify-content: space-between;
   align-items: center;
 
+  @media only screen and (max-width : $bp-medium ) {
+    flex-direction: column-reverse;
+    align-items: first baseline;
+    gap: 1rem;
+  }
+
+  h2{
+    font-size: 2rem;
+  }
+
   span {
     color: #9fd6b7;
   }

@@ -23,16 +23,18 @@ a{
   color: white;
   text-decoration: none;
 }
+
 header {
   background-color: #9fd6b7;
   color: white;
   padding: 3rem 8rem;
   width: 100%;
-  height: 35vh;
+  height: 45vh;
   background-size: 100%;
-  -webkit-clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
-  clip-path: polygon(0 0, 100% 0, 100% 50%, 0 100%);
+  -webkit-clip-path: polygon(0 0, 100% 0, 100% 85vh, 0 100%);
+  clip-path: polygon(0 0, 100% 0, 100% 80%, 0 100%);
   position: relative;
+  margin-bottom: 5rem;
   
   h1 {
     font-size: 3rem;
@@ -57,5 +59,6 @@ header {
   height: 100%;
   display: inline-block;
   background-size: cover;
+  margin-top: 2rem;
 }
 </style>

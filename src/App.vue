@@ -15,6 +15,10 @@ export default {
 };
 </script>
 <style lang="scss">
+
+.main{
+  padding: 2rem;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -37,8 +41,13 @@ body {
   line-height: 1.4;
 }
 
+
 html {
   font-size: 62.5%;
+
+  @media only screen and (max-width : $bp-medium ) {
+    font-size: 50.25%;
+  }
 }
 
 h1 {

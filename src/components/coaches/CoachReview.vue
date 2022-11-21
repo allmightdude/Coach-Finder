@@ -47,6 +47,10 @@
     &-info {
       width: 100%;
     }
+
+    p{
+      font-size: 1.2rem;
+    }
   }
 
   &__item-img {
@@ -66,11 +70,16 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
   }
 
   p {
     color: #848484;
+  }
+
+  svg{
+    width: 1.5rem;;
+    height: 1.5rem;
   }
 }
 </style>

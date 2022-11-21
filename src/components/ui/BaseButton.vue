@@ -45,8 +45,9 @@ export default {
 <style lang="scss">
 .btn,
 .btn a {
-  padding: 1rem 2rem;
+  padding: .75rem 1.2rem;
   border-radius: 50px;
+  font-size: 1.2rem;
   margin: 0 0.2rem;
   color: white;
   border: none;

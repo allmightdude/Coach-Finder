@@ -9,8 +9,9 @@
 .badge {
   background-color: #eff8f3;
   border: 1px solid #dbf2e5;
-  padding: 1rem 2rem;
+  padding: .5rem 1rem ;
   color: #ababab;
+  font-size: 1.2rem;
   border-radius: 10px;
   display: inline-block;
   

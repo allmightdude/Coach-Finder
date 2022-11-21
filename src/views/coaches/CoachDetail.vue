@@ -3,12 +3,14 @@
     <div class="coach__profile">
       <img src="@/assets/images/6.jpg" class="coach__img" />
       <h2 class="coach__name">{{ fullName }}</h2>
-      <h4 class="coach__loaction">Poland</h4>
+      <h4 class="coach__location">Poland</h4>
       <ul class="coach__areas mt-1">
         <base-badge v-for="area in areas" :key="area">{{ area }}</base-badge>
       </ul>
       <div class="mt-2">
-        <base-button link :to="coachContactLink" mode="orange">Contact Coach</base-button>
+        <base-button link :to="coachContactLink" mode="orange"
+          >Contact Coach</base-button
+        >
       </div>
 
       <div class="mt-2">
@@ -49,7 +51,7 @@
     </div>
 
     <h3 class="mt-2">About</h3>
-    <p class="mt-1">
+    <p class="coach__about mt-1">
       Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
       eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
       voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
@@ -88,9 +90,9 @@ export default {
     rate() {
       return this.selectedCoach.hourlyRate;
     },
-    coachContactLink(){
-        return this.$route.path + "/contact"
-    }
+    coachContactLink() {
+      return this.$route.path + "/contact";
+    },
   },
 
   created() {
@@ -110,20 +112,35 @@ export default {
 
 .coach {
   &__img {
-    width: 20rem;
-    height: 20rem;
+    width: 11rem;
+    height: 11rem;
     border-radius: 50%;
     background-color: red;
     margin: 0 auto;
   }
+
+  &__name {
+    font-size: 2rem;
+  }
+
+  &__location {
+    font-size: 1.2rem;
+    color: #cec9c9;
+    font-weight: 400;
+  }
+
   &__activity {
     display: flex;
     justify-content: space-between;
     margin-top: 2rem;
 
     div svg {
-      width: 5rem;
-      height: 5rem;
+      width: 3rem;
+      height: 3rem;
+    }
+
+    span {
+      font-size: 1.3rem;
     }
   }
 
@@ -142,6 +159,11 @@ export default {
     justify-content: center;
     border: 1px dashed #707070;
     border-radius: 10px;
+
+    @media only screen and (max-width: $bp-medium) {
+      width: 10rem;
+      height: 8rem;
+    }
   }
 
   &__articles-icon {
@@ -164,5 +186,11 @@ export default {
       fill: #e8c158;
     }
   }
+
+  &__about {
+    font-size: 1.3rem;
+    line-height: 1.7;
+    color: #4b4b4b;
+  } 
 }
 </style>
