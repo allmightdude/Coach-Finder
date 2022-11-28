@@ -1,5 +1,5 @@
 export default {
-    registerCoach(context , coach){
+    async registerCoach(context , coach){
         const userId = context.rootGetters.userId;
         const newCoach = {
             firstName : coach.firstName,
@@ -9,7 +9,7 @@ export default {
             areas : coach.areas,
         }
 
-        context.commit('registerCoach' , {
+        await context.commit('registerCoach' , {
             id : userId,
             ...newCoach 
         })

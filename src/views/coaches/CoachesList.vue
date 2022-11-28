@@ -4,21 +4,28 @@
       <input type="text" placeholder="Leadership" />
       <button class="clear-input">&#x2716;</button>
     </div>
+
     <button class="btn-sort">
       <svg class="sort-icon">
         <use xlink:href="@/assets/sprite.svg#icon-sort"></use>
       </svg>
     </button>
+
+    <coach-filter
+      @change-filter="setFilter"
+      ref="dropdown"
+      class="dropdown"
+    ></coach-filter>
   </form>
 
   <div class="coaches__title mt-2">
     <h2><span>24</span> Coach Are Available</h2>
-    <base-button link isDashed to="/register" >Register as a coach</base-button>
+    <base-button link isDashed to="/register">Register as a coach</base-button>
   </div>
 
   <ul class="coaches mt-2">
     <coach-item
-      v-for="coach in coaches"
+      v-for="coach in filterCoaches"
       :key="coach.id"
       :coach="coach"
     ></coach-item>
@@ -27,22 +34,58 @@
 
 <script>
 import CoachItem from "../../components/coaches/CoachItem.vue";
+import CoachFilter from "../../components/coaches/CoachFilter.vue";
 
 export default {
+  data() {
+    return {
+      activeFilters: {
+        frontend: true,
+        backend: true,
+        career: true,
+      },
+    };
+  },
+  methods: {
+    setFilter(filters) {
+      this.activeFilters = filters;
+    },
+  },
   components: {
     CoachItem,
+    CoachFilter,
   },
-  computed : {
-    coaches(){
-      return this.$store.getters['coaches/coaches'];
-    }
-  }
+  computed: {
+    filterCoaches() {
+      const coaches = this.$store.getters["coaches/coaches"];
+      return coaches.filter((coach) => {
+        if (this.activeFilters.frontend && coach.areas.includes("frontend")) {
+          return true;
+        }
+        if (this.activeFilters.backend && coach.areas.includes("backend")) {
+          return true;
+        }
+        if (this.activeFilters.career && coach.areas.includes("career")) {
+          return true;
+        }
+        return false;
+      });
+    },
+  },
+  created() {
+    document.addEventListener("click", this.documentClick);
+  },
+  beforeUnmount() {
+    document.removeEventListener("click", this.documentClick);
+  },
 };
 </script>
 
 <style lang="scss" scoped>
 .search {
+  position: relative;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   gap: 0.5rem;
 
@@ -55,15 +98,15 @@ export default {
     flex-direction: row-reverse;
   }
 
-  input{
+  input {
     width: 100%;
     border: none;
     padding: 0 1.5rem;
     border-radius: 10px;
   }
 
-  .clear-input{
-    background-color: #EFEFEF;
+  .clear-input {
+    background-color: #efefef;
     border: none;
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
@@ -72,7 +115,7 @@ export default {
   }
 }
 
-.btn-sort{
+.btn-sort {
   background-color: #5dbee7;
   width: 5rem;
   height: 4rem;
@@ -80,7 +123,7 @@ export default {
   border: 2px solid #000;
   color: white;
 
-  svg{
+  svg {
     fill: white;
   }
 }
@@ -90,18 +133,34 @@ export default {
   justify-content: space-between;
   align-items: center;
 
-  @media only screen and (max-width : $bp-medium ) {
+  @media only screen and (max-width: $bp-medium) {
     flex-direction: column-reverse;
     align-items: first baseline;
     gap: 1rem;
   }
 
-  h2{
+  h2 {
     font-size: 2rem;
   }
 
   span {
     color: #9fd6b7;
+  }
+}
+
+.filter-coach {
+  padding: 0.5rem 1.5rem;
+  font-size: 1.2rem;
+  right: 0;
+  top: 4.5rem;
+  border-radius: 5px;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+  background-color: orange;
+  width: 100%;
+  display: flex;
+
+  li {
+    padding: 0.3rem;
   }
 }
 </style>

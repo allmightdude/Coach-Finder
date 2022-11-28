@@ -22,7 +22,7 @@ export default {
           firstName: "Julie",
           lastName: "Jones",
           img: "@/assets/images/2.jpg",
-          areas: ["frontend", "career"],
+          areas: ["frontend"],
           description:
             "I am Julie and as a senior developer in a big tech company, I can help you get your first job or progress in your current role.",
           hourlyRate: 20,
@@ -32,7 +32,7 @@ export default {
           firstName: "Julie",
           lastName: "Jones",
           img: "@/assets/images/3.jpg",
-          areas: ["frontend", "career"],
+          areas: ["career"],
           description:
             "I am Julie and as a senior developer in a big tech company, I can help you get your first job or progress in your current role.",
           hourlyRate: 10,
@@ -42,47 +42,7 @@ export default {
           firstName: "Julie",
           lastName: "Jones",
           img: "@/assets/images/4.jpg",
-          areas: ["frontend", "career"],
-          description:
-            "I am Julie and as a senior developer in a big tech company, I can help you get your first job or progress in your current role.",
-          hourlyRate: 30,
-        },
-        {
-          id: "c5",
-          firstName: "Julie",
-          lastName: "Jones",
-          img: "@/assets/images/5.jpg",
-          areas: ["frontend", "career"],
-          description:
-            "I am Julie and as a senior developer in a big tech company, I can help you get your first job or progress in your current role.",
-          hourlyRate: 30,
-        },
-        {
-          id: "c6",
-          firstName: "Julie",
-          lastName: "Jones",
-          img: "@/assets/images/6.jpg",
-          areas: ["frontend", "career"],
-          description:
-            "I am Julie and as a senior developer in a big tech company, I can help you get your first job or progress in your current role.",
-          hourlyRate: 30,
-        },
-        {
-          id: "c7",
-          firstName: "Julie",
-          lastName: "Jones",
-          img: "@/assets/images/7.jpg",
-          areas: ["frontend", "career"],
-          description:
-            "I am Julie and as a senior developer in a big tech company, I can help you get your first job or progress in your current role.",
-          hourlyRate: 30,
-        },
-        {
-          id: "c8",
-          firstName: "Julie",
-          lastName: "Jones",
-          img: "@/assets/images/8.jpg",
-          areas: ["frontend", "career"],
+          areas: ["frontend", "backend"],
           description:
             "I am Julie and as a senior developer in a big tech company, I can help you get your first job or progress in your current role.",
           hourlyRate: 30,
