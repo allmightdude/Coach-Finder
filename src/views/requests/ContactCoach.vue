@@ -1,21 +1,53 @@
 <template>
   <base-card>
-    <form>
+    <form @submit.prevent="submitForm">
       <div class="form-control">
         <label for="email"> Your E-Mail</label>
-        <input type="email" id="email" />
+        <input type="email" id="email"  v-model="email"/>
       </div>
 
       <div class="form-control">
         <label for="message"> Your Message</label>
-        <textarea id="message" cols="10"></textarea>
+        <textarea id="message" cols="10" v-model="message"></textarea>
       </div>
+
+      <p class="error" v-if="!formIsValid">Please enter a valid email address and non-empty message.</p>
+
       <div class="actions">
         <base-button type="submit">Send Message</base-button>
       </div>
     </form>
   </base-card>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      email : "",
+      message : "",
+      formIsValid : true
+    }
+  },
+  methods :{ 
+    submitForm(){
+      this.formIsValid = true;
+      if(this.email === "" || !this.email.includes('@') || this.message === ""){
+        this.formIsValid = false;
+        return;
+      }
+
+      this.$store.dispatch('requests/contactCoach' , {
+        email : this.email,
+        message : this.message ,
+        coachId : this.$route.params.id
+      });
+
+      this.$router.replace('/coaches');
+    }
+  }
+}
+</script>
 
 <style lang="scss" scoped>
 form {
@@ -59,5 +91,11 @@ textarea:focus {
 
 .actions {
   text-align: center;
+}
+
+.error{
+  color: rgb(255, 110, 110);
+  font-size: 1.2rem;
+  margin: 1rem 0;
 }
 </style>

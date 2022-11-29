@@ -1,15 +1,16 @@
 <template>
   <base-card>
     <li class="request">
-      <div>E-Mail</div>
-      <a href="" class="email">sabzi_f@yahoo.com</a>
+      <span>E-Mail : </span>
+      <a href="" class="email">{{requestItem.userEmail}}</a>
+      <p>{{requestItem.message}}</p>
     </li>
   </base-card>
 </template>
 
 <script>
 export default {
-  props :['request'],
+  props :['requestItem'],
   computed: {
     emailLink(){
       return 'mailto:' + this.request.email;
@@ -25,7 +26,6 @@ export default {
   a {
     color: #9fd6b7;
     margin-top: 1rem;
-    display: block;
   }
 
   &::after {
