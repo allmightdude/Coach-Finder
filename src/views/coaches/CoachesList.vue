@@ -20,18 +20,25 @@
 
   <div class="coaches__title mt-2">
     <h2><span>24</span> Coach Are Available</h2>
-    <base-button link isDashed to="/register" v-if="!isCoach"
+    <base-button link isDashed to="/register" v-if="!isCoach && !isLoading"
       >Register as a coach</base-button
     >
   </div>
-
-  <ul class="coaches mt-2">
-    <coach-item
-      v-for="coach in filterCoaches"
-      :key="coach.id"
-      :coach="coach"
-    ></coach-item>
-  </ul>
+  <section>
+    <div v-if="isLoading">
+      <base-spinner></base-spinner>
+    </div>
+    <ul class="coaches mt-2" v-else-if="hasCoaches">
+      <coach-item
+        v-for="coach in filterCoaches"
+        :key="coach.id"
+        :coach="coach"
+      ></coach-item>
+    </ul>
+    <base-card v-else>
+      <h3>Not Coach Find</h3>
+    </base-card>
+  </section>
 </template>
 
 <script>
@@ -41,6 +48,7 @@ import CoachFilter from "../../components/coaches/CoachFilter.vue";
 export default {
   data() {
     return {
+      isLoading: false,
       activeFilters: {
         frontend: true,
         backend: true,
@@ -67,6 +75,9 @@ export default {
     isCoach() {
       return this.$store.getters["coaches/isCoach"];
     },
+    hasCoaches() {
+      return this.$store.getters["coaches/hasCoaches"];
+    },
   },
   components: {
     CoachItem,
@@ -76,8 +87,14 @@ export default {
     setFilter(filters) {
       this.activeFilters = filters;
     },
-    loadCoaches() {
-      this.$store.dispatch("coaches/loadCoaches");
+    async loadCoaches() {
+      this.isLoading = true;
+      try {
+        await this.$store.dispatch("coaches/loadCoaches");
+      } catch (error) {
+        console.log(error);
+      }
+      this.isLoading = false;
     },
   },
 
