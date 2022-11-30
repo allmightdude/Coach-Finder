@@ -20,7 +20,7 @@
 
   <div class="coaches__title mt-2">
     <h2><span>24</span> Coach Are Available</h2>
-    <base-button link isDashed to="/register">Register as a coach</base-button>
+    <base-button link isDashed to="/register" v-if="!isCoach">Register as a coach</base-button>
   </div>
 
   <ul class="coaches mt-2">
@@ -71,6 +71,9 @@ export default {
         return false;
       });
     },
+    isCoach(){
+      return this.$store.getters['coaches/isCoach'];
+    }
   },
   created() {
     document.addEventListener("click", this.documentClick);

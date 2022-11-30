@@ -58,7 +58,7 @@ export default {
     CheckboxForm,
   },
   methods: {
-    submitaData() {
+    async submitaData() {
       const data = {
         firstName: this.firstName,
         lastName: this.lastName,
@@ -66,7 +66,7 @@ export default {
         hourlyRate: this.hourlyRate,
         areas: [...this.areas],
       }
-      this.$store.dispatch('coaches/registerCoach' , data);
+      await this.$store.dispatch('coaches/registerCoach' , data);
       this.$router.replace('/coaches');
     },
   },
