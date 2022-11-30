@@ -5,7 +5,7 @@
         <img :src="this.coach.img" class="coaches__img" />
         <div class="coaches__info-box">
           <p class="coaches__info-name">{{ fullName }}</p>
-          <p class="coaches__info-caption">Leadership for Beginner</p>
+          <p class="coaches__info-caption">{{caption}}</p>
           <p class="coaches__info-rate">
             <svg class="star-icon">
               <use xlink:href="@/assets/sprite.svg#icon-star"></use>
@@ -57,6 +57,10 @@ export default {
     },
     rate() {
       return this.coach.hourlyRate;
+    },
+    caption() {
+      console.log(this.coach);
+      return this.coach.caption;
     },
     coachDetailLink() {
       return this.$route.path + "/" + this.coach.id;

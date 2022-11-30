@@ -64,6 +64,7 @@ export default {
         lastName: this.lastName,
         description: this.description,
         hourlyRate: this.hourlyRate,
+        caption : this.caption,
         areas: [...this.areas],
       }
       await this.$store.dispatch('coaches/registerCoach' , data);

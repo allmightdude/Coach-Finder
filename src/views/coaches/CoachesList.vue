@@ -20,7 +20,9 @@
 
   <div class="coaches__title mt-2">
     <h2><span>24</span> Coach Are Available</h2>
-    <base-button link isDashed to="/register" v-if="!isCoach">Register as a coach</base-button>
+    <base-button link isDashed to="/register" v-if="!isCoach"
+      >Register as a coach</base-button
+    >
   </div>
 
   <ul class="coaches mt-2">
@@ -46,15 +48,6 @@ export default {
       },
     };
   },
-  methods: {
-    setFilter(filters) {
-      this.activeFilters = filters;
-    },
-  },
-  components: {
-    CoachItem,
-    CoachFilter,
-  },
   computed: {
     filterCoaches() {
       const coaches = this.$store.getters["coaches/coaches"];
@@ -71,13 +64,28 @@ export default {
         return false;
       });
     },
-    isCoach(){
-      return this.$store.getters['coaches/isCoach'];
-    }
+    isCoach() {
+      return this.$store.getters["coaches/isCoach"];
+    },
   },
+  components: {
+    CoachItem,
+    CoachFilter,
+  },
+  methods: {
+    setFilter(filters) {
+      this.activeFilters = filters;
+    },
+    loadCoaches() {
+      this.$store.dispatch("coaches/loadCoaches");
+    },
+  },
+
   created() {
     document.addEventListener("click", this.documentClick);
+    this.loadCoaches();
   },
+
   beforeUnmount() {
     document.removeEventListener("click", this.documentClick);
   },
