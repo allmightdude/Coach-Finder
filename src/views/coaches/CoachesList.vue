@@ -1,4 +1,8 @@
 <template>
+  <base-dialog :show="!!error" title="Error Occured!" @close="handleError">
+    <p>{{ error }}</p>
+  </base-dialog>
+
   <form class="search">
     <div class="search__input">
       <input type="text" placeholder="Leadership" />
@@ -57,6 +61,7 @@ export default {
   data() {
     return {
       isLoading: false,
+      error: null,
       activeFilters: {
         frontend: true,
         backend: true,
@@ -98,13 +103,17 @@ export default {
     async loadCoaches(refresh = false) {
       this.isLoading = true;
       try {
-        await this.$store.dispatch("coaches/loadCoaches" , {
-          forceRefresh : refresh
+        await this.$store.dispatch("coaches/loadCoaches", {
+          forceRefresh: refresh,
         });
       } catch (error) {
-        console.log(error);
+        this.error = error.message || "Something went wrong...";
       }
       this.isLoading = false;
+    },
+
+    handleError() {
+      this.error = null;
     },
   },
 
