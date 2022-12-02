@@ -11,6 +11,12 @@
       </svg>
     </button>
 
+    <button class="btn-sort">
+      <svg class="sort-icon">
+        <use xlink:href="@/assets/sprite.svg#icon-sort"></use>
+      </svg>
+    </button>
+
     <coach-filter
       @change-filter="setFilter"
       ref="dropdown"
@@ -20,6 +26,8 @@
 
   <div class="coaches__title mt-2">
     <h2><span>24</span> Coach Are Available</h2>
+    <base-button isDashed @click="loadCoaches(true)">Refresh</base-button>
+
     <base-button link isDashed to="/register" v-if="!isCoach && !isLoading"
       >Register as a coach</base-button
     >
@@ -87,10 +95,12 @@ export default {
     setFilter(filters) {
       this.activeFilters = filters;
     },
-    async loadCoaches() {
+    async loadCoaches(refresh = false) {
       this.isLoading = true;
       try {
-        await this.$store.dispatch("coaches/loadCoaches");
+        await this.$store.dispatch("coaches/loadCoaches" , {
+          forceRefresh : refresh
+        });
       } catch (error) {
         console.log(error);
       }
