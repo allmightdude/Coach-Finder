@@ -59,7 +59,6 @@ export default {
       return this.coach.hourlyRate;
     },
     caption() {
-      console.log(this.coach);
       return this.coach.caption;
     },
     coachDetailLink() {

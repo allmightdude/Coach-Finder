@@ -2,26 +2,36 @@
   <div>
     <div>
       <section>
-        <base-card>
-          <header>
-            <h3>Requests Received</h3>
-          </header>
-        </base-card>
+        <header>
+          <h3>Requests Received</h3>
+        </header>
       </section>
     </div>
-    <ul class="requests" v-if="hasRequests">
+
+    <base-card v-if="isLoading">
+      <base-spinner></base-spinner>
+    </base-card>
+
+    <ul class="requests" v-else-if="hasRequests && !isLoading">
       <request-item
         v-for="request in requests"
         :requestItem="request"
         :key="request"
       ></request-item>
     </ul>
+    <p v-else> There aren't no requests...</p>
   </div>
 </template>
 
 <script>
 import RequestItem from "../../components/requests/RequestItem.vue";
 export default {
+  data() {
+    return {
+      isLoading: false,
+      error: null,
+    };
+  },
   components: {
     RequestItem,
   },
@@ -32,6 +42,21 @@ export default {
     requests() {
       return this.$store.getters["requests/requests"];
     },
+  },
+
+  methods: {
+    async loadRequests() {
+      this.isLoading = true;
+      try {
+        await this.$store.dispatch("requests/fetchRequests");
+      } catch (error) {
+        this.error = error.message || "Can't fetch requests!";
+      }
+      this.isLoading = false;
+    },
+  },
+  created() {
+    this.loadRequests();
   },
 };
 </script>

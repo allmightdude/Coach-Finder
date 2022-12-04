@@ -18,9 +18,6 @@ export default {
       }
     );
 
-    let responseData = response.json();
-
-    console.log(responseData);
     if (!response.ok) {
       // handle error
     }
