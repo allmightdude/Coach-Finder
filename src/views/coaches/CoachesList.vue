@@ -21,7 +21,7 @@
         ref="dropdown"
         class="dropdown"
       ></coach-filter>
-    </form>
+    </form> 
     <div class="coaches__title mt-2">
       <h2><span>24</span> Coach Are Available</h2>
       <base-button isDashed @click="loadCoaches(true)">Refresh</base-button>
