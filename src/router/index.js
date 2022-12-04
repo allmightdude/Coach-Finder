@@ -5,6 +5,7 @@ import CoachDetail from "../views/coaches/CoachDetail.vue";
 import CoachRegisteration from "../views/coaches/CoachRegisteration.vue";
 import ContactCoach from "../views/requests/ContactCoach.vue";
 import RequestsReceived from "../views/requests/RequestsReceived.vue";
+import NotFound from "../views/NotFound.vue";
 
 const routes = [
   { path: "/", redirect: '/coaches' },
@@ -12,7 +13,8 @@ const routes = [
   { path: "/coaches/:id", component: CoachDetail , props : true},
   {path : '/coaches/:id/contact' , component : ContactCoach},
   { path: "/register", component: CoachRegisteration },
-  {path : "/requests" ,  component : RequestsReceived}
+  {path : "/requests" ,  component : RequestsReceived},
+  {path : "/:notFound(.*)" ,  component : NotFound}
 ];
 
 const router = createRouter({
