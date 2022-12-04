@@ -19,4 +19,8 @@ app.component('base-card' , BaseCard);
 app.component('base-spinner' , BaseSpinner);
 app.component('base-dialog' , BaseDialog);
 
-app.use(store).use(router).mount('#app')
+app.use(store).use(router);
+
+router.isReady().then(()=>{
+    app.mount('#app');
+})

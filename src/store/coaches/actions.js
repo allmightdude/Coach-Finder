@@ -32,7 +32,7 @@ export default {
   },
 
   async loadCoaches(context , payload) {
-    if(!payload.forceRefresh && !context.getters.shouldUpdate){
+    if(!context.getters.shouldUpdate && !payload.forceRefresh){
       return
     }
     

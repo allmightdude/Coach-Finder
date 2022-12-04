@@ -9,10 +9,14 @@
         </base-card>
       </section>
     </div>
+    <ul class="requests" v-if="hasRequests">
+      <request-item
+        v-for="request in requests"
+        :requestItem="request"
+        :key="request"
+      ></request-item>
+    </ul>
   </div>
-  <ul class="requests" v-if="hasRequests">
-    <request-item v-for="request in requests" :requestItem="request" :key="request"></request-item>
-  </ul>
 </template>
 
 <script>
@@ -25,9 +29,9 @@ export default {
     hasRequests() {
       return this.$store.getters["requests/hasRequests"];
     },
-    requests(){
-      return this.$store.getters['requests/requests'];
-    }
+    requests() {
+      return this.$store.getters["requests/requests"];
+    },
   },
 };
 </script>

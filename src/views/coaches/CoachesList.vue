@@ -1,56 +1,51 @@
 <template>
-  <base-dialog :show="!!error" title="Error Occured!" @close="handleError">
-    <p>{{ error }}</p>
-  </base-dialog>
+  <div>
+    <base-dialog :show="!!error" title="Error Occured!" @close="handleError">
+      <p>{{ error }}</p>
+    </base-dialog>
 
-  <form class="search">
-    <div class="search__input">
-      <input type="text" placeholder="Leadership" />
-      <button class="clear-input">&#x2716;</button>
+    <form class="search">
+      <div class="search__input">
+        <input type="text" placeholder="Leadership" />
+        <button class="clear-input">&#x2716;</button>
+      </div>
+
+      <button class="btn-sort">
+        <svg class="sort-icon">
+          <use xlink:href="@/assets/sprite.svg#icon-sort"></use>
+        </svg>
+      </button>
+
+      <coach-filter
+        @change-filter="setFilter"
+        ref="dropdown"
+        class="dropdown"
+      ></coach-filter>
+    </form>
+    <div class="coaches__title mt-2">
+      <h2><span>24</span> Coach Are Available</h2>
+      <base-button isDashed @click="loadCoaches(true)">Refresh</base-button>
+
+      <base-button link isDashed to="/register" v-if="!isCoach && !isLoading"
+        >Register as a coach</base-button
+      >
     </div>
-
-    <button class="btn-sort">
-      <svg class="sort-icon">
-        <use xlink:href="@/assets/sprite.svg#icon-sort"></use>
-      </svg>
-    </button>
-
-    <button class="btn-sort">
-      <svg class="sort-icon">
-        <use xlink:href="@/assets/sprite.svg#icon-sort"></use>
-      </svg>
-    </button>
-
-    <coach-filter
-      @change-filter="setFilter"
-      ref="dropdown"
-      class="dropdown"
-    ></coach-filter>
-  </form>
-
-  <div class="coaches__title mt-2">
-    <h2><span>24</span> Coach Are Available</h2>
-    <base-button isDashed @click="loadCoaches(true)">Refresh</base-button>
-
-    <base-button link isDashed to="/register" v-if="!isCoach && !isLoading"
-      >Register as a coach</base-button
-    >
+    <section>
+      <div v-if="isLoading">
+        <base-spinner></base-spinner>
+      </div>
+      <ul class="coaches mt-2" v-else-if="hasCoaches">
+        <coach-item
+          v-for="coach in filterCoaches"
+          :key="coach.id"
+          :coach="coach"
+        ></coach-item>
+      </ul>
+      <base-card v-else>
+        <h3>Not Coach Find</h3>
+      </base-card>
+    </section>
   </div>
-  <section>
-    <div v-if="isLoading">
-      <base-spinner></base-spinner>
-    </div>
-    <ul class="coaches mt-2" v-else-if="hasCoaches">
-      <coach-item
-        v-for="coach in filterCoaches"
-        :key="coach.id"
-        :coach="coach"
-      ></coach-item>
-    </ul>
-    <base-card v-else>
-      <h3>Not Coach Find</h3>
-    </base-card>
-  </section>
 </template>
 
 <script>
