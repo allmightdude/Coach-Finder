@@ -2,7 +2,7 @@
   <the-header></the-header>
 
   <div class="main">
-    <router-view v-slot="{Component}">
+    <router-view v-slot="{ Component }">
       <transition name="route" mode="out-in">
         <component :is="Component"></component>
       </transition>
@@ -131,5 +131,11 @@ img {
 }
 .route-leave-active {
   transition: all 0.3s ease-out;
+}
+
+.error {
+  color: rgb(255, 110, 110);
+  font-size: 1.2rem;
+  margin: 1rem 0;
 }
 </style>

@@ -2,32 +2,32 @@
   <form @submit.prevent="submitaData">
     <div class="form-control">
       <label for="firstName">FirstName</label>
-      <input type="text" id="firstName" v-model.trim="firstName" />
+      <input type="text" id="firstName" v-model.trim="firstName" required />
     </div>
 
     <div class="form-control">
       <label for="lastName">LastName</label>
-      <input type="text" id="lastName" v-model.trim="lastName" />
+      <input type="text" id="lastName" v-model.trim="lastName" required />
     </div>
 
     <div class="form-control">
       <label for="description">description</label>
-      <textarea rows="5" cols="" v-model.trim="description"></textarea>
+      <textarea rows="5" cols="" v-model.trim="description"> required</textarea>
     </div>
 
     <div class="form-control">
       <label for="rate">Hourly Rate</label>
-      <input type="number" id="rate" v-model.number="hourlyRate" />
+      <input type="number" id="rate" v-model.number="hourlyRate" required />
     </div>
 
     <div class="form-control">
       <label for="caption">Caption</label>
-      <input type="text" id="caption" v-model.trim="caption" />
+      <input type="text" id="caption" v-model.trim="caption" required />
     </div>
 
     <div class="form-control">
       <label for="caption">Your Picture</label>
-      <input type="file" id="picture" />
+      <input type="file" id="picture" required />
     </div>
 
     <div class="form-control demo">
@@ -36,8 +36,10 @@
         <checkbox-form v-model="areas"></checkbox-form>
       </div>
     </div>
+    <p v-if="!formIsValid" class="error">Please fill all fields</p>
 
-    <base-button type="submit">Register</base-button>
+    <base-button v-if="!isLoading" type="submit">Register</base-button>
+    <base-spinner v-else class="loader"></base-spinner>
   </form>
 </template>
 
@@ -52,6 +54,9 @@ export default {
       caption: "",
       hourlyRate: null,
       areas: [],
+      error: null,
+      formIsValid: true,
+      isLoading: false,
     };
   },
   components: {
@@ -59,16 +64,33 @@ export default {
   },
   methods: {
     async submitaData() {
+      this.formIsValid = true;
+      if (
+        this.firstName === "" ||
+        this.lastName === "" ||
+        this.description === "" ||
+        this.hourlyRate === "" ||
+        this.caption === ""
+      ) {
+        this.formIsValid = false;
+      }
       const data = {
         firstName: this.firstName,
         lastName: this.lastName,
         description: this.description,
         hourlyRate: this.hourlyRate,
-        caption : this.caption,
+        caption: this.caption,
         areas: [...this.areas],
+      };
+
+      this.isLoading = true;
+      try {
+        await this.$store.dispatch("coaches/registerCoach", data);
+        this.$router.replace("/coaches");
+      } catch (error) {
+        this.error = error.message || "Can not register as a coach";
       }
-      await this.$store.dispatch('coaches/registerCoach' , data);
-      this.$router.replace('/coaches');
+      this.isLoading = false;
     },
   },
 };
@@ -133,5 +155,9 @@ textarea {
 .invalid input,
 .invalid textarea {
   border: 1px solid red;
+}
+
+.loader {
+  text-align: left;
 }
 </style>

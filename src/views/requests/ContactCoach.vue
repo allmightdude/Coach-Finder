@@ -93,9 +93,5 @@ textarea:focus {
   text-align: center;
 }
 
-.error{
-  color: rgb(255, 110, 110);
-  font-size: 1.2rem;
-  margin: 1rem 0;
-}
+
 </style>
