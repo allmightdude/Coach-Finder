@@ -5,8 +5,16 @@
         <li>
           <router-link to="/coaches">Coaches</router-link>
         </li>
-        <li>
+        <li v-if="isLoggedIn">
           <router-link to="/requests">Requests</router-link>
+        </li>
+
+        <li v-else>
+          <base-button isDashed link to="/auth">LogIn</base-button>
+        </li>
+
+        <li v-if="isLoggedIn" @click="logout">
+          <base-button isDashed>Log out</base-button>
         </li>
       </ul>
     </nav>
@@ -18,8 +26,24 @@
   </header>
 </template>
 
+<script>
+export default {
+  computed: {
+    isLoggedIn() {
+      return this.$store.getters["isAuthenticated"];
+    },
+  },
+  methods:{
+    logout(){
+      this.$store.dispatch('logout');
+      this.$router.replace('/coaches');
+    }
+  }
+};
+</script>
+
 <style lang="scss" scoped>
-a{
+a {
   color: white;
   text-decoration: none;
 }
@@ -35,7 +59,7 @@ header {
   clip-path: polygon(0 0, 100% 0, 100% 80%, 0 100%);
   position: relative;
   margin-bottom: 5rem;
-  
+
   h1 {
     font-size: 3rem;
   }
@@ -43,6 +67,7 @@ header {
   ul {
     display: flex;
     justify-content: flex-end;
+    align-items: center;
     text-align: right;
     list-style: none;
     font-size: 1.5rem;

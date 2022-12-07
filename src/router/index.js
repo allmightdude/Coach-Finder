@@ -6,6 +6,7 @@ import CoachRegisteration from "../views/coaches/CoachRegisteration.vue";
 import ContactCoach from "../views/requests/ContactCoach.vue";
 import RequestsReceived from "../views/requests/RequestsReceived.vue";
 import NotFound from "../views/NotFound.vue";
+import UserAuth from "../views/auth/UserAuth.vue";
 
 const routes = [
   { path: "/", redirect: '/coaches' },
@@ -14,6 +15,7 @@ const routes = [
   {path : '/coaches/:id/contact' , component : ContactCoach},
   { path: "/register", component: CoachRegisteration },
   {path : "/requests" ,  component : RequestsReceived},
+  {path : "/auth" ,  component : UserAuth},
   {path : "/:notFound(.*)" ,  component : NotFound}
 ];
 

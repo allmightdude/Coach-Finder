@@ -1,15 +1,16 @@
-import getters from './getters'
-import mutations from './mutations'
-import actions from './actions'
+import getters from "./getters";
+import mutations from "./mutations";
+import actions from "./actions";
 
 export default {
-  state(){
-    return{
-      userId : 'c24',
-      token : null
-    }
+  state() {
+    return {
+      token: null,
+      userId: null,
+      tokenExpiration: null,
+    };
   },
   getters,
   mutations,
-  actions
-}
+  actions,
+};

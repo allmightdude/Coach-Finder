@@ -24,11 +24,13 @@
     </form> 
     <div class="coaches__title mt-2">
       <h2><span>24</span> Coach Are Available</h2>
-      <base-button isDashed @click="loadCoaches(true)">Refresh</base-button>
+      <base-button class="refresh" isDashed @click="loadCoaches(true)">Refresh</base-button>
 
-      <base-button link isDashed to="/register" v-if="!isCoach && !isLoading"
+      <base-button link isDashed to="/register" v-if="!isCoach && !isLoading && isLoggedIn"
         >Register as a coach</base-button
       >
+
+      <base-button v-if="!isLoggedIn" link to="/auth">Login</base-button>
     </div>
     <section>
       <div v-if="isLoading">
@@ -86,6 +88,10 @@ export default {
     hasCoaches() {
       return this.$store.getters["coaches/hasCoaches"];
     },
+    isLoggedIn(){
+      return this.$store.getters['isAuthenticated'];
+    }
+
   },
   components: {
     CoachItem,
@@ -204,5 +210,9 @@ export default {
   li {
     padding: 0.3rem;
   }
+}
+
+.refresh{
+  margin-left: auto;
 }
 </style>

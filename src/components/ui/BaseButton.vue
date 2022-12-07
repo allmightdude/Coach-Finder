@@ -8,7 +8,7 @@
   </button>
 
   <router-link :to="to" class="btn" :class="[mode , {dashed : isDashed}]" v-else>
-    <slot></slot>
+    <slot></slot> 
   </router-link>
 </template>
 
@@ -43,6 +43,7 @@ export default {
 </script>
 
 <style lang="scss">
+
 .btn,
 .btn a {
   padding: .75rem 1.2rem;

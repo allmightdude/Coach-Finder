@@ -1,8 +1,7 @@
 export default {
-    registerCoach(state , coach){
-        state.coaches.push(coach);
-    },
-    setCoaches(state , coaches){
-        state.coaches = coaches;
+    setUser(state , payload){
+        state.token = payload.token,
+        state.userId = payload.userId,
+        state.tokenExpiration = payload.tokenExpiration
     }
 }

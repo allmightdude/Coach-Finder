@@ -1,5 +1,9 @@
 <template>
   <div>
+    <base-dialog :show="!!error" title="Error Occured!" @close="handleError">
+      <p>{{ error }}</p>
+    </base-dialog>
+
     <div>
       <section>
         <header>
@@ -19,7 +23,7 @@
         :key="request"
       ></request-item>
     </ul>
-    <p v-else> There aren't no requests...</p>
+    <p v-else>There aren't no requests...</p>
   </div>
 </template>
 
@@ -53,6 +57,9 @@ export default {
         this.error = error.message || "Can't fetch requests!";
       }
       this.isLoading = false;
+    },
+    handleError() {
+      this.error = null;
     },
   },
   created() {

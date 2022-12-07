@@ -22,23 +22,23 @@
 
 <script>
 export default {
-    props : {
-        show :{ 
-            type : Boolean,
-            required : false
-        },
-        title : {
-            type : String,
-            default : "Error occured"
-        }
+  props: {
+    show: {
+      type: Boolean,
+      required: false,
     },
-    emits : ['close'],
-    methods:{
-        tryClose(){
-            this.$emit('close');
-        }
-    }
-}
+    title: {
+      type: String,
+      default: "Error occured",
+    },
+  },
+  emits: ["close"],
+  methods: {
+    tryClose() {
+      this.$emit("close");
+    },
+  },
+};
 </script>
 
 <style scoped>
