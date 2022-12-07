@@ -10,14 +10,18 @@ export default {
       areas: coach.areas,
     };
 
+    const token = context.rootGetters.token;
+    console.log(token);
+
     let response = await fetch(
-      `https://coach-app-3d02c-default-rtdb.firebaseio.com/coaches/${userId}.json`,
+      `https://coach-app-3d02c-default-rtdb.firebaseio.com/coaches/${userId}.json?auth=${token}`,
       {
         method: "PUT",
         body: JSON.stringify(newCoach),
       }
     );
-
+    console.log(token);
+    console.log(response);
     if (!response.ok) {
       // handle error
     }
@@ -28,11 +32,11 @@ export default {
     });
   },
 
-  async loadCoaches(context , payload) {
-    if(!context.getters.shouldUpdate && !payload.forceRefresh){
-      return
+  async loadCoaches(context, payload) {
+    if (!context.getters.shouldUpdate && !payload.forceRefresh) {
+      return;
     }
-    
+
     const response = await fetch(
       "https://coach-app-3d02c-default-rtdb.firebaseio.com/coaches.json"
     );
@@ -57,7 +61,7 @@ export default {
       };
       coaches.push(newCoach);
     }
-    context.commit('setCoaches' , coaches);
-    context.commit('setTimestamp');
+    context.commit("setCoaches", coaches);
+    context.commit("setTimestamp");
   },
 };
