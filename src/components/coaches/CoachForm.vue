@@ -1,4 +1,6 @@
 <template>
+  <base-dialog :show="!!error" title="An error occured" @close="handleError">{{error}}</base-dialog>
+
   <form @submit.prevent="submitaData">
     <div class="form-control">
       <label for="firstName">FirstName</label>
@@ -92,6 +94,10 @@ export default {
       }
       this.isLoading = false;
     },
+    handleError(){
+      this.error = null;
+      this.isLoading = false;
+    }
   },
 };
 </script>
