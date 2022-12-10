@@ -10,7 +10,7 @@ export default {
       tokenExpiration: null,
     };
   },
-  getters,
-  mutations,
-  actions,
+  getters : getters,
+  mutations : mutations,
+  actions : actions,
 };

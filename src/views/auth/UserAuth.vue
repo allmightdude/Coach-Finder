@@ -92,21 +92,22 @@ export default {
         return;
       }
 
+      const userPayload = {
+        email: this.email,
+        password: this.password,
+      };
+
       try {
         this.isLoading = true;
         if (this.mode === "login") {
-          await this.$store.dispatch("login", {
-            email: this.email,
-            password: this.password,
-          });
+          await this.$store.dispatch("login", userPayload);
         } else {
-          await this.$store.dispatch("signup", {
-            email: this.email,
-            password: this.password,
-          });
+          await this.$store.dispatch("signup", userPayload);
         }
         this.isLoading = false;
-        this.$router.replace('/coaches');
+        const redirectUrl = "/" + (this.$route.query.redirect || "coaches");
+
+        this.$router.replace(redirectUrl);
       } catch (error) {
         this.error = error.message || "Failed to Authenticate , try later...";
       }

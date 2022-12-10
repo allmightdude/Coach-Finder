@@ -11,7 +11,6 @@ export default {
     };
 
     const token = context.rootGetters.token;
-    console.log(token);
 
     let response = await fetch(
       `https://coach-app-3d02c-default-rtdb.firebaseio.com/coaches/${userId}.json?auth=${token}`,

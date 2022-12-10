@@ -5,6 +5,7 @@
     </base-dialog>
 
     <form class="search">
+      {{isLoggedIn}}
       <div class="search__input">
         <input type="text" placeholder="Leadership" />
         <button class="clear-input">&#x2716;</button>
@@ -30,7 +31,7 @@
         >Register as a coach</base-button
       >
 
-      <base-button v-if="!isLoggedIn" link to="/auth">Login</base-button>
+      <base-button v-if="!isLoggedIn" link to="/auth?redirect=register">Login to register as Coach</base-button>
     </div>
     <section>
       <div v-if="isLoading">

@@ -20,7 +20,7 @@
       v-model="areas"
       @change="setAreas"
     />
-    <label for="frontend">Back End</label>
+    <label for="backend">Back End</label>
   </div>
 
     <div>
