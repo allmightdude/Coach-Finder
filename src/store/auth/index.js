@@ -8,7 +8,8 @@ export default {
       token: null,
       userId: null,
       tokenExpiration: null,
-      isCoach : false
+      isCoach : false,
+      didAutoLogout : false
     };
   },
   getters ,
