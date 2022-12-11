@@ -23,7 +23,7 @@
       ></coach-filter>
     </form> 
     <div class="coaches__title mt-2">
-      <h2><span>24</span> Coach Are Available</h2>
+      <h2><span>{{numberOfCoaches >= 0 ? numberOfCoaches : 0}}</span> Coach Are Available</h2>
       <base-button class="refresh" isDashed @click="loadCoaches(true)">Refresh</base-button>
 
       <base-button link isDashed to="/register" v-if="!isCoach && !isLoading && isLoggedIn"
@@ -90,6 +90,9 @@ export default {
     },
     isLoggedIn(){
       return this.$store.getters['isAuthenticated'];
+    },
+    numberOfCoaches(){
+      return this.$store.getters["coaches/numberOfCoaches"];
     }
 
   },
