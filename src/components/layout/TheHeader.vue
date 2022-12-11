@@ -9,7 +9,7 @@
           <router-link to="/requests">Requests</router-link>
         </li>
 
-        <li v-else>
+        <li v-else-if="!isLoggedIn && hasCoaches">
           <base-button isDashed link to="/auth">LogIn</base-button>
         </li>
 
@@ -32,6 +32,9 @@ export default {
     isLoggedIn() {
       return this.$store.getters["isAuthenticated"];
     },
+    hasCoaches(){
+      return this.$store.getters['coaches/hasCoaches'];
+    }
   },
   methods:{
     logout(){

@@ -19,12 +19,10 @@ export default {
         body: JSON.stringify(newCoach),
       }
     );
-    console.log(token);
-    console.log(response);
+
     if (!response.ok) {
       // handle error
     }
-
     context.commit("registerCoach", {
       id: userId,
       ...newCoach,

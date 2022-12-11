@@ -71,6 +71,9 @@ export default {
         return "Login Instealy";
       }
     },
+    isCoach() {
+      return this.$store.getters["coaches/isCoach"];
+    },
   },
   methods: {
     switchMode() {
@@ -101,9 +104,12 @@ export default {
         this.isLoading = true;
         if (this.mode === "login") {
           await this.$store.dispatch("login", userPayload);
+          console.log(this.isCoach);
         } else {
           await this.$store.dispatch("signup", userPayload);
         }
+        await this.$store.dispatch("isCoach", { isCoach: this.isCoach });
+
         this.isLoading = false;
         const redirectUrl = "/" + (this.$route.query.redirect || "coaches");
 

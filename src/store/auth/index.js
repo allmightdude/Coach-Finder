@@ -8,9 +8,10 @@ export default {
       token: null,
       userId: null,
       tokenExpiration: null,
+      isCoach : false
     };
   },
-  getters : getters,
-  mutations : mutations,
-  actions : actions,
+  getters ,
+  mutations ,
+  actions 
 };

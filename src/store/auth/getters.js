@@ -7,5 +7,9 @@ export default {
     },
     isAuthenticated(state){
         return !!state.token;
+    },
+    isCoach(state){
+        console.log(!!state.isCoach);
+        return state.isCoach
     }
 }

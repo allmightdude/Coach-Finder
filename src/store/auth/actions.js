@@ -4,6 +4,7 @@ export default {
       ...payload,
       mode: "login",
     });
+
   },
 
   async signup(context, payload) {
@@ -39,17 +40,46 @@ export default {
       throw error;
     }
 
+    localStorage.setItem("token", responseData.idToken);
+    localStorage.setItem("userId", responseData.localId);
+
     context.commit("setUser", {
       token: responseData.idToken,
       userId: responseData.localId,
       tokenExpiration: responseData.expiresIn,
     });
   },
+
+  tryLogin(context) {
+    const token = localStorage.getItem("token");
+    const userId = localStorage.getItem("userId");
+    const isCoach = JSON.parse(localStorage.getItem("isCoach"));
+    
+    if (token && userId) {
+      context.commit("setUser", {
+        token: token,
+        userId: userId,
+        tokenExpiration: null,
+        isCoach : isCoach
+      });
+    }
+  },
+
   logout(context) {
+    localStorage.removeItem('token');
+    localStorage.removeItem('userId');
+    localStorage.removeItem('isCoach');
+
     context.commit("setUser", {
       token: null,
       userId: null,
       tokenExpiration: null,
+      isCoach: false
     });
   },
+
+  isCoach(context , payload){
+    localStorage.setItem('isCoach' , JSON.stringify(payload.isCoach));
+    context.commit("isCoach", payload.isCoach);
+  }
 };

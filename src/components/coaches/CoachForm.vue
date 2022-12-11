@@ -88,6 +88,7 @@ export default {
       this.isLoading = true;
       try {
         await this.$store.dispatch("coaches/registerCoach", data);
+        await this.$store.dispatch("isCoach", { isCoach: true });
         this.$router.replace("/coaches");
       } catch (error) {
         this.error = error.message || "Can not register as a coach";
