@@ -18,13 +18,12 @@
 
       <coach-filter
         @change-filter="setFilter"
-        ref="dropdown"
         class="dropdown"
       ></coach-filter>
     </form>
     <div class="coaches__title mt-2">
       <h2>
-        <span>{{ numberOfCoaches >= 0 ? numberOfCoaches : 0 }}</span> Coach Are
+        <span>{{ sortedCoaches.length >= 0 ? sortedCoaches.length : 0 }}</span> Coach Are
         Available
       </h2>
       <base-button class="refresh" isDashed @click="loadCoaches(true)"
@@ -139,6 +138,7 @@ export default {
   },
   methods: {
     setFilter(filters) {
+      console.log(filters);
       this.activeFilters = filters;
     },
     async loadCoaches(refresh = false) {

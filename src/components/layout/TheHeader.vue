@@ -13,7 +13,7 @@
           <router-link to="/requests">Requests</router-link>
         </li>
 
-        <li v-else-if="!isLoggedIn && hasCoaches">
+        <li v-else-if="!isLoggedIn">
           <base-button isDashed link to="/auth">LogIn</base-button>
         </li>
 

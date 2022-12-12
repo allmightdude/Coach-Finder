@@ -12,7 +12,7 @@ export default {
         return coaches.some(coach => coach.id === userId);
     },
     numberOfCoaches(state){
-        return state.coaches.length - 1 ;
+        return state.coaches.length ;
     },
     shouldUpdate(state){    
         const lastFetch = state.lastFetch;
