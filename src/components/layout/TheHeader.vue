@@ -2,7 +2,7 @@
   <header class="header">
     <nav>
       <ul class="header__menu">
-        <li v-if="isLoggedIn && isCoach" class="name">
+        <li v-if="isLoggedIn && isCoach && myInfo" class="name">
           Hi {{ myInfo.firstName }}
         </li>
 

@@ -10,7 +10,7 @@
         <button class="clear-input">&#x2716;</button>
       </div>
 
-      <button class="btn-sort">
+      <button class="btn-sort" @click.prevent="sort">
         <svg class="sort-icon">
           <use xlink:href="@/assets/sprite.svg#icon-sort"></use>
         </svg>
@@ -21,28 +21,44 @@
         ref="dropdown"
         class="dropdown"
       ></coach-filter>
-    </form> 
+    </form>
     <div class="coaches__title mt-2">
-      <h2><span>{{numberOfCoaches >= 0 ? numberOfCoaches : 0}}</span> Coach Are Available</h2>
-      <base-button class="refresh" isDashed @click="loadCoaches(true)">Refresh</base-button>
+      <h2>
+        <span>{{ numberOfCoaches >= 0 ? numberOfCoaches : 0 }}</span> Coach Are
+        Available
+      </h2>
+      <base-button class="refresh" isDashed @click="loadCoaches(true)"
+        >Refresh</base-button
+      >
 
-      <base-button link isDashed to="/register" v-if="!isCoach && !isLoading && isLoggedIn"
+      <base-button
+        link
+        isDashed
+        to="/register"
+        v-if="!isCoach && !isLoading && isLoggedIn"
         >Register as a coach</base-button
       >
 
-      <base-button v-if="!isLoggedIn && hasCoaches" link to="/auth?redirect=register">Login to register as Coach</base-button>
+      <base-button
+        v-if="!isLoggedIn && hasCoaches"
+        link
+        to="/auth?redirect=register"
+        >Login to register as Coach</base-button
+      >
     </div>
     <section>
       <div v-if="isLoading">
         <base-spinner></base-spinner>
       </div>
+
       <ul class="coaches mt-2" v-else-if="hasCoaches">
         <coach-item
-          v-for="coach in filterCoaches"
+          v-for="coach in sortedCoaches"
           :key="coach.id"
           :coach="coach"
         ></coach-item>
       </ul>
+
       <base-card v-else>
         <h3>Not Coach Find</h3>
       </base-card>
@@ -64,6 +80,8 @@ export default {
         backend: true,
         career: true,
       },
+      sorting: null,
+      ascSort: null,
     };
   },
   computed: {
@@ -88,13 +106,32 @@ export default {
     hasCoaches() {
       return this.$store.getters["coaches/hasCoaches"];
     },
-    isLoggedIn(){
-      return this.$store.getters['isAuthenticated'];
+    isLoggedIn() {
+      return this.$store.getters["isAuthenticated"];
     },
-    numberOfCoaches(){
+    numberOfCoaches() {
       return this.$store.getters["coaches/numberOfCoaches"];
-    }
+    },
 
+    sortedCoaches() {
+      if (!this.sorting) {
+        return this.filterCoaches;
+      }
+      return this.filterCoaches.slice().sort((u1, u2) => {
+        if (this.sorting === "asc" && u1.firstName > u2.firstName) {
+          return 1;
+        }
+        else if(this.sorting === 'asc'){
+          return -1
+        }
+        else if(this.sorting === 'desc' && u1.fullName > u2.fullName){
+          return -1;
+        }
+        else{
+          return 1;
+        }
+      });
+    },
   },
   components: {
     CoachItem,
@@ -114,6 +151,14 @@ export default {
         this.error = error.message || "Something went wrong...";
       }
       this.isLoading = false;
+    },
+    sort() {
+      this.ascSort = !this.ascSort;
+      if (this.ascSort) {
+        this.sorting = "asc";
+      } else {
+        this.sorting = "desc";
+      }
     },
 
     handleError() {
@@ -215,7 +260,7 @@ export default {
   }
 }
 
-.refresh{
+.refresh {
   margin-left: auto;
 }
 </style>
