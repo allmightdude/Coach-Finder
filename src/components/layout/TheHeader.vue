@@ -2,6 +2,10 @@
   <header class="header">
     <nav>
       <ul class="header__menu">
+        <li v-if="isLoggedIn && isCoach" class="name">
+          Hi {{ myInfo.firstName }}
+        </li>
+
         <li>
           <router-link to="/coaches">Coaches</router-link>
         </li>
@@ -32,16 +36,22 @@ export default {
     isLoggedIn() {
       return this.$store.getters["isAuthenticated"];
     },
-    hasCoaches(){
-      return this.$store.getters['coaches/hasCoaches'];
+    hasCoaches() {
+      return this.$store.getters["coaches/hasCoaches"];
+    },
+    myInfo() {
+      return this.$store.getters["coaches/myInfo"];
+    },
+    isCoach(){
+      return this.$store.getters["isCoach"];
     }
   },
-  methods:{
-    logout(){
-      this.$store.dispatch('logout');
-      this.$router.replace('/coaches');
-    }
-  }
+  methods: {
+    logout() {
+      this.$store.dispatch("logout");
+      this.$router.replace("/coaches");
+    },
+  },
 };
 </script>
 
@@ -88,5 +98,12 @@ header {
   display: inline-block;
   background-size: cover;
   margin-top: 2rem;
+}
+
+.name{
+  margin-right: auto;
+  font-size: 1.7rem;
+  border: 1px solid #fff;
+  border-radius: 10px;
 }
 </style>

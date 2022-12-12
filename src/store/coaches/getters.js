@@ -23,5 +23,10 @@ export default {
 
         const currentTime = new Date().getTime();
         return (currentTime - lastFetch) / 1000 > 60;
+    },
+    myInfo(state , getters , rootState , rootGetters){
+        const userId = rootGetters.userId;
+
+        return state.coaches.find(coach => coach.id === userId);
     }
 }
