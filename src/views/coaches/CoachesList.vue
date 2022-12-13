@@ -6,7 +6,11 @@
 
     <form class="search">
       <div class="search__input">
-        <input type="text" placeholder="Leadership" />
+        <input
+          type="text"
+          placeholder="Leadership"
+          v-model="activeSearchTerm"
+        />
         <button class="clear-input">&#x2716;</button>
       </div>
 
@@ -16,15 +20,12 @@
         </svg>
       </button>
 
-      <coach-filter
-        @change-filter="setFilter"
-        class="dropdown"
-      ></coach-filter>
+      <coach-filter @change-filter="setFilter" class="dropdown"></coach-filter>
     </form>
     <div class="coaches__title mt-2">
       <h2>
-        <span>{{ sortedCoaches.length >= 0 ? sortedCoaches.length : 0 }}</span> Coach Are
-        Available
+        <span>{{ sortedCoaches.length >= 0 ? sortedCoaches.length : 0 }}</span>
+        Coach Are Available
       </h2>
       <base-button class="refresh" isDashed @click="loadCoaches(true)"
         >Refresh</base-button
@@ -52,7 +53,7 @@
 
       <ul class="coaches mt-2" v-else-if="hasCoaches">
         <coach-item
-          v-for="coach in sortedCoaches"
+          v-for="coach in availableCoaches"
           :key="coach.id"
           :coach="coach"
         ></coach-item>
@@ -81,24 +82,11 @@ export default {
       },
       sorting: null,
       ascSort: null,
+      activeSearchTerm: "",
+      enteredSearchTerm: "",
     };
   },
   computed: {
-    filterCoaches() {
-      const coaches = this.$store.getters["coaches/coaches"];
-      return coaches.filter((coach) => {
-        if (this.activeFilters.frontend && coach.areas.includes("frontend")) {
-          return true;
-        }
-        if (this.activeFilters.backend && coach.areas.includes("backend")) {
-          return true;
-        }
-        if (this.activeFilters.career && coach.areas.includes("career")) {
-          return true;
-        }
-        return false;
-      });
-    },
     isCoach() {
       return this.$store.getters["coaches/isCoach"];
     },
@@ -111,7 +99,34 @@ export default {
     numberOfCoaches() {
       return this.$store.getters["coaches/numberOfCoaches"];
     },
-
+    coaches() {
+      return this.$store.getters["coaches/coaches"];
+    },
+    availableCoaches() {
+      let availableCoaches = [];
+      if (this.activeSearchTerm) {
+        availableCoaches = this.coaches.filter((coach) => 
+          coach.firstName.includes(this.activeSearchTerm)
+        );
+      } else if (this.coaches) {
+        availableCoaches = this.coaches;
+      }
+      return availableCoaches;
+    },
+    filterCoaches() {
+      return this.availableCoaches.filter((coach) => {
+        if (this.activeFilters.frontend && coach.areas.includes("frontend")) {
+          return true;
+        }
+        if (this.activeFilters.backend && coach.areas.includes("backend")) {
+          return true;
+        }
+        if (this.activeFilters.career && coach.areas.includes("career")) {
+          return true;
+        }
+        return false;
+      });
+    },
     sortedCoaches() {
       if (!this.sorting) {
         return this.filterCoaches;
@@ -119,14 +134,11 @@ export default {
       return this.filterCoaches.slice().sort((u1, u2) => {
         if (this.sorting === "asc" && u1.firstName > u2.firstName) {
           return 1;
-        }
-        else if(this.sorting === 'asc'){
-          return -1
-        }
-        else if(this.sorting === 'desc' && u1.fullName > u2.fullName){
+        } else if (this.sorting === "asc") {
           return -1;
-        }
-        else{
+        } else if (this.sorting === "desc" && u1.fullName > u2.fullName) {
+          return -1;
+        } else {
           return 1;
         }
       });
@@ -138,7 +150,6 @@ export default {
   },
   methods: {
     setFilter(filters) {
-      console.log(filters);
       this.activeFilters = filters;
     },
     async loadCoaches(refresh = false) {
@@ -161,10 +172,21 @@ export default {
       }
     },
 
+    updateSearch(event) {
+      this.enteredSearchTerm = event.target.value;
+    },
+
     handleError() {
       this.error = null;
     },
   },
+  // watch: {
+  //   enteredSearchTerm(val) {
+  //     setTimeout(() => {
+  //       this.activeSearchTerm = val;
+  //     }, 300);
+  //   },
+  // },
 
   created() {
     document.addEventListener("click", this.documentClick);
