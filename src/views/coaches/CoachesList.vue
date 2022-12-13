@@ -106,7 +106,7 @@ export default {
       let availableCoaches = [];
       if (this.activeSearchTerm) {
         availableCoaches = this.coaches.filter((coach) => 
-          coach.firstName.includes(this.activeSearchTerm)
+          this.fullName(coach).includes(this.activeSearchTerm)
         );
       } else if (this.coaches) {
         availableCoaches = this.coaches;
@@ -174,6 +174,10 @@ export default {
 
     updateSearch(event) {
       this.enteredSearchTerm = event.target.value;
+    },
+
+    fullName(coach){
+      return coach.firstName + " " + coach.lastName;
     },
 
     handleError() {
